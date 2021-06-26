@@ -10,7 +10,11 @@
         content="
           192.168.0.10 server
           192.168.0.11 node01
-          192.168.0.12 node02"
+          192.168.0.12 node02
+          192.168.0.13 node03
+          192.168.0.14 node04
+          192.168.0.15 node05
+          "
     
     - name: Add "/etc/ansible/hosts"
       blockinfile: |
@@ -18,7 +22,26 @@
         content="
           [CentOS]
           node01
-          node02"
+          node02
+          
+          [Ubuntu]
+          node03
+          node04
+          
+          [Win]
+          node05 ansible_connection=winrm ansible_ssh_user=vagrant ansible_ssh_port=5985
+          "
+          
+    - name: Install pip
+      yum:
+        name: python-pip
+        state: present
+        
+    - name: Install pywinrm
+      pip:
+        name: pywinrm
+        state: present        
+        
           
     - name: Install sshpass for Authentication
       yum:
