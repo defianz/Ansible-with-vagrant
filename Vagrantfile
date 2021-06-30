@@ -134,6 +134,8 @@ Vagrant.configure(Vagrant_API_Version) do |config|
 	 cfg.vm.provision "shell", inline: "ansible-playbook Auto_known_host.yml", privileged: false	 
 	 cfg.vm.provision "file", source: "Auto_authorized_keys.yml", destination: "Auto_authorized_keys.yml"
 	 cfg.vm.provision "shell", inline: "ansible-playbook Auto_authorized_keys.yml --extra-vars 'ansible_ssh_pass=vagrant'", privileged: false	
+	 cfg.vm.provision "file", source: "cb_plugin.yml", destination: "cb_plugin.yml"
+	 cfg.vm.provision "shell", inline: "ansible-playbook cb_plugin.yml"
   end
   
 end
